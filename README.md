@@ -1,2 +1,5 @@
 # warp-drive
-A Node 
+
+A packaged client-server JS framework wrapped by phaser.io
+
+
