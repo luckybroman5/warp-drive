@@ -1,0 +1,16 @@
+{
+  "name": "warp-drive-server",
+  "version": "0.0.1",
+  "description": "The Multiplayer Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Kade Green",
+  "license": "ISC",
+  "dependencies": {
+    "install": "^0.8.2",
+    "npm": "^3.10.9",
+    "sha256": "^0.2.0"
+  }
+}
