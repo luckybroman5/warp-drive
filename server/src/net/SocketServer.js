@@ -30,6 +30,7 @@ class SocketServer {
 
         // Every new incomming connection
         this.driver.on('connection', (client) => {
+            logger.info('Socket Server: Incomming Connection!');
             this.assignClientToGroup(client);
         });
 
@@ -42,7 +43,7 @@ class SocketServer {
         logger.info(`SocketServer: Adding new Connection Group`);
         const connectionGroup = new ConnectionGroup();
         this.connectionGroups[connectionGroup.id] = connectionGroup;
-        this.list.push(connectionGroup);
+        this.pool.push(connectionGroup);
         return connectionGroup;
     }
 
@@ -78,7 +79,7 @@ class SocketServer {
             }
         }
         // Create a new Connection group, and add the client there
-        this.addConnectionGroup()(client);
+        this.addConnectionGroup().addClient(client);
     }
 }
 

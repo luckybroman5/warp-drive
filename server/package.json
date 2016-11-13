@@ -9,8 +9,10 @@
   "author": "Kade Green",
   "license": "ISC",
   "dependencies": {
+    "base-64": "^0.1.0",
     "install": "^0.8.2",
     "npm": "^3.10.9",
+    "sha1": "^1.1.1",
     "sha256": "^0.2.0"
   }
 }

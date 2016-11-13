@@ -30,7 +30,7 @@ class ConnectionGroup {
         this.list = []; // Used to apply Iterate over each client
 
         // while true, this obj won't ask for termination
-        this.keepAlive = options.keepAlive || false;
+        this.keepAlive = this.options.keepAlive || false;
 
         // The rate this obj will ask for termination when
         // there aren't any clients connected
@@ -104,7 +104,7 @@ class ConnectionGroup {
                 if (this.isIdle) this.isIdle = false;
             }
             
-            logger.info(`Connection: ${this.id}`
+            logger.debug(`Connection: ${this.id}`
             + `----------------------------`
             + `Active Connections: ${this.list.length}`
             + `Run Time: ${now - this.startTime}`

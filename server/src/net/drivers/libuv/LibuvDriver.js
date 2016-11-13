@@ -2,6 +2,8 @@
 
 const net = require('net');
 const EventEmitter = require('events');
+const config = require('../../../../config');
+const logger = config.logger;
 
 
 const webSocketProtocol = require('../../protocol/server/WebSocket');
@@ -20,7 +22,7 @@ class LibuvDriver {
 
         this.port = this.options.port || null;
         this.server = net.createServer((socket) => {
-            this._handleConnection(socket);
+            this._handshake(socket);
         });
 
         const params = {
@@ -40,10 +42,19 @@ class LibuvDriver {
        this.emitter.emit(eventName, data); 
     }
 
-    _handleConnection(socket) {
-        socket.on('data', (data) => {
+    _handshake(socket) {
+        // If the protocol passes, the socket will be returned
+        // As if it were just a plain old TCP Socket, with no listeners
+        socket.once('data', (data) => {
             const rawData = data.toString();
-            webSocketProtocol(rawData);
+            const responseHeaders = webSocketProtocol(rawData);
+            if (!responseHeaders) {
+                logger.info('Libuv: Invalid Connection Request.. Closing..');
+                socket.destroy();
+                return;
+            }
+            socket.write(responseHeaders);
+            this.emitter.emit('connection', socket);
         });
     }
 }

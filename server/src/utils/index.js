@@ -12,7 +12,7 @@ const randomstring = require('randomstring');
  * meaning that no collisions isn't guaranteed
  */
 const generateUniqueId = function() {
-    const baseString = randomstring() + Date.now();
+    const baseString = randomstring.generate() + Date.now();
     return sha256(Date.now() + baseString);
 }
 
